@@ -5,13 +5,14 @@ import { ThemedText } from "./ThemedText";
 type Props = ViewProps
 
 export default function Banner({style, ...rest}: Props) {
-    const colors = useThemeColors()
-    console.log(colors)
 
+    const colors = useThemeColors();
+    
     return (
         <View style={styles.banner}>
-            {/* <Image source={require('@/assets/images/profil/profil.webp')} style={styles.image} /> */}
-            {/* <ThemedText style={styles.circle}></ThemedText> */}
+            <ThemedText style={styles.circle}></ThemedText>
+            <ThemedText color={"white"}> Logo</ThemedText>
+            <Image source={require('@/assets/images/profil/profil.webp')} style={styles.image} />
         </View>
     )
 }
@@ -19,13 +20,19 @@ export default function Banner({style, ...rest}: Props) {
 const styles = StyleSheet.create({
     banner: {
         flex: 0,
-        color: 'white',
-        backgroundColor: 'blue'
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+        alignItems: 'center'
     },
     circle: {
-
+        width: 60,
+        height: 60,
+        borderRadius: 30,
+        backgroundColor: '#F5F5F5'
     },
     image : {
-        
+        width: 60,
+        height: 60,
+        borderRadius: 30
     }
 })

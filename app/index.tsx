@@ -9,7 +9,7 @@ export default function Index() {
     <SafeAreaView style={styles.header}>
       <Text>Edit app/index.tsx to edit this screen.esbbtrdff</Text>
       <ThemedText variant={"subtitle1"} color={"white"}>ddddd</ThemedText>
-      {/* <Banner/> */}
+      <Banner/>
     </SafeAreaView>
   );
 }
@@ -18,6 +18,6 @@ const styles = StyleSheet.create({
   header: {
     paddingHorizontal: 12,
     paddingBottom: 8,
-    backgroundColor: 'red',
+    backgroundColor: '#D6E4FD',
   },
 })
