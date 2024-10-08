@@ -17,10 +17,10 @@ export default function Navbar({style, ...rest}: Props) {
                 <Image style={styles.image} source={require('@/assets/images/navbar/home.png')}/>
             </View>
             <View style={styles.text}>
-                <Image style={styles.image} source={require('@/assets/images/navbar/home.png')}/>
+                <Image style={styles.image} source={require('@/assets/images/navbar/banana.png')}/>
             </View>
             <View style={styles.text}>
-                <Image style={styles.image} source={require('@/assets/images/navbar/home.png')}/>
+                <Image style={styles.image} source={require('@/assets/images/navbar/account.png')}/>
             </View>
 
         </View>
