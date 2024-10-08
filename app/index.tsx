@@ -1,4 +1,5 @@
 import Banner from "@/components/Banner";
+import Navbar from "@/components/Navbar";
 import NutritionalCard from "@/components/NutritionalCard";
 import ProgressBar from "@/components/ProgressBar";
 import Row from "@/components/Row";
@@ -51,15 +52,18 @@ export default function Index() {
         <Row>
           <ProgressBar progress={60}/>
         </Row>
+        <Navbar/>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   header: {
+    position: 'relative',
     paddingHorizontal: 12,
     paddingBottom: 8,
     backgroundColor: 'white',
+    flex: 1
   },
   rowTwoItems: {
     flexDirection: 'row',
