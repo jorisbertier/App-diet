@@ -1,5 +1,6 @@
 import Banner from "@/components/Banner";
 import NutritionalCard from "@/components/NutritionalCard";
+import ProgressBar from "@/components/ProgressBar";
 import Row from "@/components/Row";
 import { ThemedText } from "@/components/ThemedText";
 import useThemeColors from "@/hooks/UseThemeColors";
@@ -46,6 +47,9 @@ export default function Index() {
           indice={'g'}
           icon={'fat'}
           />
+        </Row>
+        <Row>
+          <ProgressBar progress={60}/>
         </Row>
     </SafeAreaView>
   );

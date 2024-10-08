@@ -13,7 +13,7 @@ type Props = {
     textColor?: string
 }
 
-const imageMapping: { [key: string]: any } = {
+const imageMapping: { [key: string ]: any } = {
     'burn': require('@/assets/images/nutritional/burn.png'),
     'protein': require('@/assets/images/nutritional/protein.png'),
     'carbs': require('@/assets/images/nutritional/carbs.png'),
