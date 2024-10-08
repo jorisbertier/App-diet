@@ -1,40 +1,89 @@
 import useThemeColors from "@/hooks/UseThemeColors";
 import { Image, StyleSheet, View, ViewProps, ViewStyle } from "react-native";
 import { ThemedText } from "./ThemedText";
+import { Dimensions } from 'react-native';
 
 type Props = {
     style?: ViewStyle,
-    icon: string,
+    icon?: string | undefined,
     nutritionalName: string,
     nutrionalData: string,
     backgroundcolor: string,
-    indice: string
+    indice: string,
+    textColor?: string
 }
 
-export default function NutritionalCard({icon, nutritionalName, nutrionalData, indice, backgroundcolor, style, ...rest}: Props) {
+const imageMapping: { [key: string]: any } = {
+    'burn': require('@/assets/images/nutritional/burn.png'),
+    'protein': require('@/assets/images/nutritional/protein.png'),
+    'carbs': require('@/assets/images/nutritional/carbs.png'),
+    'fat': require('@/assets/images/nutritional/fat.png'),
+};
+
+export default function NutritionalCard({icon, textColor = 'black', nutritionalName, nutrionalData, indice, backgroundcolor, style, ...rest}: Props) {
 
     const colors = useThemeColors();
+
+    function capitalizeFirstLetter(name: string) {
+        if (!name) return '';
+        return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+    }
+
+    const imageSource = imageMapping[icon];
     
+    console.log(icon)
     return (
-        <View>
-            <View>
-                <ThemedText>{nutritionalName}</ThemedText>
-                <Image source={require('@/assets/images/profil/profil.webp')} style={styles.icon}/>
+        <View style={[styles.card, {backgroundColor: backgroundcolor}]}>
+            <View style={styles.block1}>
+                <ThemedText variant="title1" color={textColor}>{capitalizeFirstLetter(nutritionalName)}</ThemedText>
+                <View style={styles.wrapperImage}>
+                    <Image source={imageSource} style={styles.icon}/>
+                </View>
             </View>
-            <View>
-                <ThemedText>{nutrionalData}{indice}</ThemedText>
+            <View style={styles.block2}>
+                <ThemedText variant="title1" color={textColor}>
+                    {nutrionalData} 
+                    <ThemedText variant="title1" color={'grayDark'}>
+                        {' ' + indice}
+                    </ThemedText>
+                    </ThemedText>
             </View>
         </View>
     )
 }
 
-const styles = StyleSheet.create({
-    body : {
+const { height } = Dimensions.get('window');
 
+const styles = StyleSheet.create({
+    card : {
+        // flex: 1/2,
+        width: '48%',
+        marginVertical: 10,
+        height: height * 0.2,
+        borderRadius: 20,
+        padding: 12,
+        justifyContent: 'space-between',
+        
+    },
+    bodyCard: {
     },
     icon : {
+        height: 20,
+        width: 20,
+        
+    },
+    wrapperImage : {
         height: 30,
         width: 30,
-        borderRadius: 15
-    }
+        borderRadius: 15,
+        backgroundColor: 'white',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    block1 : {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    block2 : {},
 })

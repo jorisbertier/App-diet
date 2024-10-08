@@ -15,6 +15,7 @@ export default function Section({style, ...rest}: Props) {
 
 const styles = StyleSheet.create({
     body : {
-        backgroundColor: 'red'
+        backgroundColor: 'red',
+        padding: 24
     }
 })

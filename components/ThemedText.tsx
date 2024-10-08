@@ -16,17 +16,17 @@ const styles = StyleSheet.create({
         fontSize: 8,
         lineHeight: 12,
     },
-    subtitle1: {
-        fontSize: 14,
+    title1: {
+        fontSize: 16,
         lineHeight: 16,
         fontWeight: "bold",
     },
-    subtitle2: {
+    title2: {
         fontSize: 12,
         lineHeight: 16,
         fontWeight: "bold",
     },
-    subtitle3: {
+    title3: {
         fontSize: 10,
         lineHeight: 16,
         fontWeight: "bold",
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
 
 type Props = TextProps & {
     variant?: keyof typeof styles,
-    color?: keyof typeof Colors["light"]
+    color?: keyof typeof Colors["light"] | string
 }
 
 export function ThemedText({variant, color, style,  ...rest}: Props) {
