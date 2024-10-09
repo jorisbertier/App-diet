@@ -2,6 +2,7 @@ import useThemeColors from "@/hooks/UseThemeColors";
 import { Image, StyleSheet, View, ViewProps, ViewStyle } from "react-native";
 import { ThemedText } from "./ThemedText";
 import { Dimensions } from 'react-native';
+import { capitalizeFirstLetter } from "@/functions/function";
 
 type Props = {
     style?: ViewStyle,
@@ -23,12 +24,6 @@ const imageMapping: { [key: string ]: any } = {
 export default function NutritionalCard({icon, textColor = 'black', nutritionalName, nutrionalData, indice, backgroundcolor, style, ...rest}: Props) {
 
     const colors = useThemeColors();
-
-    function capitalizeFirstLetter(name: string) {
-        if (!name) return '';
-        return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
-    }
-
     const imageSource = imageMapping[icon];
     
     console.log(icon)
