@@ -27,7 +27,8 @@ export default function RootLayout() {
           name="Search"
           component={Search}
         />
-        <Stack.Screen name="DetailsFood" component={DetailsFood} />
+        {/* <Stack.Screen name="screens/[id]" component={DetailsFood} /> */}
+        <Stack.Screen name="FoodDetails" component={DetailsFood} />
       </Stack.Navigator>
     </NavigationContainer>
   );

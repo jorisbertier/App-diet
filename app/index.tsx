@@ -18,8 +18,6 @@ export default function Index() {
       <Text>Edit app/index.tsx to edit this screen.esbbtrdff</Text>
       <ThemedText variant={"title1"} color={"white"}>ddddd</ThemedText>
       <Banner/>
-      {/* <Section>
-        </Section> */}
         <Row gap={5} style={styles.rowTwoItems}>
           <NutritionalCard
           nutritionalName={'calories'}
@@ -63,14 +61,6 @@ export default function Index() {
           color="#841584"
           accessibilityLabel="Search"
         />
-        <Button
-                  onPress={() =>
-                    navigation.navigate('DetailsFood')
-                  }
-          title="food id"
-          color="blue"
-          accessibilityLabel="Learn more about this purple button"
-        />
 
     </SafeAreaView>
   );
@@ -87,6 +77,7 @@ const styles = StyleSheet.create({
   rowTwoItems: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    marginTop: 30
   },
 })

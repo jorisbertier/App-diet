@@ -1,18 +1,50 @@
 import { ThemedText } from "@/components/ThemedText"
-import { router } from "expo-router"
-import { Image, Pressable, StyleSheet, View, Text, ScrollView } from "react-native";
+import { Image, Pressable, StyleSheet, View, ScrollView } from "react-native";
 import { useNavigation } from "expo-router";
 import Row from "@/components/Row";
 import useThemeColors from "@/hooks/UseThemeColors";
 import NutritionStatCard from "@/components/Screens/Details/NutritionStatCard";
 import { Dimensions } from "react-native";
 import NutritionItem from "@/components/Screens/Details/NutritionItem";
+import { useRoute } from "@react-navigation/native";
+import { useState, useEffect } from "react";
+import { foodData } from "@/data/food";
 
 const { height } = Dimensions.get('window');
+
+interface FoodItem {
+    id: number;
+    name: string;
+    nutrition: {
+        calories: string;
+        servingSize: {
+            unit: string;
+            quantity: number;
+        };
+    };
+}
+
 
 export default function DetailsFood() {
     const colors = useThemeColors() 
     const navigation = useNavigation();
+    const route = useRoute<any>();
+    const { id } = route.params; 
+
+    const [data, setData] = useState<FoodItem[]>([]);
+    const [text, onChangeText] = useState('');
+
+    useEffect(() => {
+        try {
+                setData(foodData);
+        } catch (e) {
+            console.log('Error processing data', e);
+        }
+    }, []);
+
+    const filterUniqueFood = data.find((element) => element.id === id)
+
+    console.log(filterUniqueFood?.name);
 
     return (
     <ScrollView>
@@ -28,7 +60,7 @@ export default function DetailsFood() {
             <Row>
                 <View style={styles.wrapperBlock}>
                     <View style={styles.block}>
-                        <ThemedText style={[{borderColor: colors.grayDark}]}>Fruit</ThemedText>
+                        <ThemedText style={[{borderColor: colors.grayDark}]}>Fruit {id}</ThemedText>
                     </View>
                     <View style={styles.block}>
                         <ThemedText style={[{borderColor: colors.grayDark}]}>250 g</ThemedText>
@@ -36,7 +68,7 @@ export default function DetailsFood() {
                 </View>
             </Row>
             <Row style={styles.wrapperTitle}>
-                <ThemedText variant="title" style={styles.title}>Mandarin orange</ThemedText>
+                <ThemedText variant="title" style={styles.title}>{filterUniqueFood?.name}</ThemedText>
                 <ThemedText variant="title1" style={styles.title}>Good for diet - 187kcal</ThemedText>
             </Row>
             <View style={[styles.container]}>

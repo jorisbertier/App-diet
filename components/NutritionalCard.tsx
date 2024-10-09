@@ -52,8 +52,8 @@ const { height } = Dimensions.get('window');
 const styles = StyleSheet.create({
     card : {
         // flex: 1/2,
-        width: '48%',
-        marginVertical: 10,
+        width: '49%',
+        marginVertical: 2,
         height: height * 0.2,
         borderRadius: 20,
         padding: 12,
