@@ -1,12 +1,32 @@
-import { Stack } from "expo-router";
+// import { Stack } from "expo-router";
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import Index from './index';
+import Search from '@/screens/search';
+
+const Stack = createNativeStackNavigator();
 
 export default function RootLayout() {
+  // return (
+  //   <Stack
+  //   screenOptions={{
+  //     headerShown: false
+  //   }}>
+  //     <Stack.Screen name="index" />
+  //   </Stack>
+  // );
   return (
-    <Stack
-    screenOptions={{
-      headerShown: false
-    }}>
-      <Stack.Screen name="index" />
-    </Stack>
+    <NavigationContainer independent={true}>
+      <Stack.Navigator screenOptions={{ headerShown: false}}>
+        <Stack.Screen
+          name="Home"
+          component={Index}
+        />
+        <Stack.Screen
+          name="Search"
+          component={Search}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }

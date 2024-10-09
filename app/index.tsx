@@ -5,11 +5,13 @@ import ProgressBar from "@/components/ProgressBar";
 import Row from "@/components/Row";
 import { ThemedText } from "@/components/ThemedText";
 import useThemeColors from "@/hooks/UseThemeColors";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Button } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useNavigation } from "expo-router";
 
 export default function Index() {
   
+  const navigation = useNavigation()
   const colors = useThemeColors()
   return (
     <SafeAreaView style={styles.header}>
@@ -53,6 +55,14 @@ export default function Index() {
           <ProgressBar progress={60}/>
         </Row>
         <Navbar/>
+        <Button
+                  onPress={() =>
+                    navigation.navigate('Search')
+                  }
+          title="Learn More"
+          color="#841584"
+          accessibilityLabel="Learn more about this purple button"
+        />
     </SafeAreaView>
   );
 }
