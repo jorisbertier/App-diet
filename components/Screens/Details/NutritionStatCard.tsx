@@ -28,7 +28,6 @@ export default function NutritionStatCard({nutri, quantity, unit, backgroundcolo
 }
 
 const styles = StyleSheet.create({
-    
     statFirst :{
         padding: 20,
         backgroundColor: '#DFDFE0',
@@ -59,6 +58,6 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
     statValue: {
-        marginBottom: 15,
+        marginBottom: 10,
     },
 })

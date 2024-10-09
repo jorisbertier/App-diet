@@ -16,6 +16,10 @@ const styles = StyleSheet.create({
         fontSize: 8,
         lineHeight: 12,
     },
+    title : {
+        fontSize: 28,
+        fontWeight: "bold",
+    },
     title1: {
         fontSize: 16,
         lineHeight: 16,
