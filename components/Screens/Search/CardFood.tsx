@@ -25,7 +25,7 @@ export default function CardFood({name, id, calories, unit, quantity}: Props) {
             <View style={styles.cardFood}>
                 <View style={styles.text}>
                     <ThemedText variant="title1">{capitalizeFirstLetter(`${name}`)}</ThemedText>
-                    <ThemedText variant="title2" color={'grayDark'}>{calories} cal, {unit}, {name} {quantity} </ThemedText>
+                    <ThemedText variant="title2" color={'grayDark'}>{calories} cal, {name} {quantity} {unit}</ThemedText>
                 </View>
                 <View>
                     <Image source={require('@/assets/images/add.png')} style={styles.add}/>

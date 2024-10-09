@@ -15,6 +15,10 @@ const { height } = Dimensions.get('window');
 interface FoodItem {
     id: number;
     name: string;
+    image: string;
+    description: string;
+    category: string;
+    notes: string;
     nutrition: {
         calories: string;
         servingSize: {
@@ -44,12 +48,12 @@ export default function DetailsFood() {
 
     const filterUniqueFood = data.find((element) => element.id === id)
 
-    console.log(filterUniqueFood?.name);
+    console.log(filterUniqueFood?.image);
 
     return (
     <ScrollView>
         <View style={styles.banner}>
-            <Image source={require('@/assets/images/banana.jpg')} style={styles.image} />
+            <Image source={{uri: `${filterUniqueFood?.image}`}} style={styles.image} />
             <Pressable onPress={()=> navigation.goBack()} style={styles.back}>
                 
                     <Image source={require('@/assets/images/back.png')} style={styles.icon} />
