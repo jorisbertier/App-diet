@@ -7,7 +7,7 @@ import { ThemedText } from "@/components/ThemedText";
 import useThemeColors from "@/hooks/UseThemeColors";
 import { StyleSheet, Text, View, Button } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useNavigation } from "expo-router";
+import { Link, useNavigation } from "expo-router";
 
 export default function Index() {
   
@@ -59,10 +59,19 @@ export default function Index() {
                   onPress={() =>
                     navigation.navigate('Search')
                   }
-          title="Learn More"
+          title="Search"
           color="#841584"
+          accessibilityLabel="Search"
+        />
+        <Button
+                  onPress={() =>
+                    navigation.navigate('DetailsFood')
+                  }
+          title="food id"
+          color="blue"
           accessibilityLabel="Learn more about this purple button"
         />
+
     </SafeAreaView>
   );
 }

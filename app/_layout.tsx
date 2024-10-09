@@ -3,6 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Index from './index';
 import Search from '@/screens/search';
+import DetailsFood from '@/screens/[id]';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +27,7 @@ export default function RootLayout() {
           name="Search"
           component={Search}
         />
+        <Stack.Screen name="DetailsFood" component={DetailsFood} />
       </Stack.Navigator>
     </NavigationContainer>
   );

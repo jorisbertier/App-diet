@@ -42,7 +42,7 @@ export default function Search() {
     const colors = useThemeColors()
 
     const filteredFood = data.filter(food => food.name.toLowerCase().includes(text.toLowerCase().trim()))
-    console.log(filteredFood)
+
     return (
         <SafeAreaView style={styles.header}>
             <ThemedText>Voici ma page search</ThemedText>
