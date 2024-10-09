@@ -3,13 +3,12 @@ import { router } from "expo-router"
 import { Image, Pressable, StyleSheet, View } from "react-native";
 import { useNavigation } from "expo-router";
 
-
-
 export default function DetailsFood() {
 
     const navigation = useNavigation();
 
-    return (<>
+    return (
+    <>
         <View  style={styles.banner}>
             <Image source={require('@/assets/images/banana.jpg')} style={styles.image} />
             <Pressable onPress={()=> navigation.goBack()} style={styles.back}>
@@ -21,7 +20,7 @@ export default function DetailsFood() {
         <View style={styles.header}>
             <ThemedText>Voici ma page details food</ThemedText>
         </View>
-        </>
+    </>
     )
 }
 
