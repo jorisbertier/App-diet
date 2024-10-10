@@ -5,9 +5,9 @@ import { Dimensions } from "react-native";
 import { capitalizeFirstLetter } from "@/functions/function";
 
 type Props = {
-    nutri: string,
-    quantity: number,
-    unit: string,
+    nutri: string;
+    quantity: number | undefined;
+    unit: string;
     backgroundcolor?: string
 }
 

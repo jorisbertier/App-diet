@@ -1,7 +1,6 @@
 import { StyleSheet } from "react-native";
 import { View } from "react-native";
 import { ThemedText } from "@/components/ThemedText";
-import { capitalizeFirstLetter } from "@/functions/function";
 
 type Props = {
     name: string,
@@ -11,7 +10,7 @@ type Props = {
 export default function NutritionItem({name, quantity}: Props) {
     return (
         <View style={styles.nutri}>
-            <ThemedText variant="title1">{capitalizeFirstLetter(name)}</ThemedText>
+            <ThemedText variant="title1">{name}</ThemedText>
             <ThemedText variant="title1">{quantity}</ThemedText>
         </View>
     )
