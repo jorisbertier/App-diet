@@ -61,6 +61,14 @@ export default function Index() {
           color="#841584"
           accessibilityLabel="Search"
         />
+        <Button
+                  onPress={() =>
+                    navigation.navigate('Dashboard')
+                  }
+          title="Dashboard"
+          color="#8415"
+          accessibilityLabel="Dashboard"
+        />
 
     </SafeAreaView>
   );

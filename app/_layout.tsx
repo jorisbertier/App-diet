@@ -4,6 +4,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Index from './index';
 import Search from '@/screens/search';
 import DetailsFood from '@/screens/[id]';
+import Dashboard from '@/screens/dashboard';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +27,10 @@ export default function RootLayout() {
         <Stack.Screen
           name="Search"
           component={Search}
+        />
+        <Stack.Screen
+          name="Dashboard"
+          component={Dashboard}
         />
         {/* <Stack.Screen name="screens/[id]" component={DetailsFood} /> */}
         <Stack.Screen name="FoodDetails" component={DetailsFood} />
