@@ -42,7 +42,7 @@ export default function Dashboard() {
 
     useEffect(() => {
         // filter data foods user with Id = 1
-        const result = allUsersFoodData.filter((allFoodByOneUser) => allFoodByOneUser.userId === 1);
+        const result = allUsersFoodData.filter((allFoodByOneUser) => allFoodByOneUser.userId === 1 && allFoodByOneUser.date === selectedDate.toLocaleDateString());
         if (result.length > 0) {
             const foodIds = result.map(item => item.foodId);
             const filteredFoodData = foodIds.flatMap(foodId => {
@@ -52,7 +52,7 @@ export default function Dashboard() {
         } else {
             setResultAllDataFood([])
         }
-    }, [allUsersFoodData, allFoodData]);
+    }, [allUsersFoodData, allFoodData, selectedDate]);
 
     const handleOpenCalendar = () => {
         setIsOpen(!isOpen)
@@ -63,6 +63,7 @@ export default function Dashboard() {
     // console.log(date.toLocaleDateString())
     // console.log(selectedDate.toLocaleDateString())
     // console.log('______________')
+    
     return (
         <View style={styles.header}>
             <ThemedText>Voici ma page dashboard</ThemedText>
