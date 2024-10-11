@@ -33,17 +33,17 @@ export const UsersFoodData = [
     },
     {
         "id": 5,
-        "userId": 2,
+        "userId": 1,
         "foodId": 2,
-        "date": "10/10/2024",
+        "date": "10/11/2024",
         "mealType": "Breakfast",
         "quantity": 1
     },
     {
         "id": 6,
-        "userId": 2,
+        "userId": 1,
         "foodId": 4,
-        "date": "10/10/2024",
+        "date": "10/11/2024",
         "mealType": "Lunch",
         "quantity": 1
     },

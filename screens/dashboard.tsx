@@ -11,20 +11,16 @@ import { UsersFoodData } from "@/data/usersFoodData";
 export default function Dashboard() {
 
     const [allFoodData, setAllFoodData] = useState<FoodItem[]>([]);  // all foods
-    const [allUserData, setAllUserData] = useState([]);  // all users
+    const [allUserData, setAllUserData] = useState([]);  // all user
     const [allUsersFoodData, setAllUsersFoodData] = useState([]);  // all UsersFoodData
     const [resultAllDataFood, setResultAllDataFood] = useState<FoodItem[]>([]); //State for stock search filtered
-
-    const date = new Date();
-    let day = date.getDate();
-    let month = date.getMonth() + 1;
-    let year = date.getFullYear();
-    
-    let currentDate = `${day}/${month}/${year}`;
-    
     const [isOpen, setIsOpen] = useState(false);
     const [selectedDate, setSelectedDate]= useState<Date>(new Date())
     
+
+    /* Date */
+    const date = new Date();
+
     const setDate = (event: DateTimePickerEvent, date: Date) => {
         if(date) {
             setSelectedDate(date);
@@ -32,7 +28,8 @@ export default function Dashboard() {
             console.log(event)
         }
     };
-
+    
+    /* API */
     useEffect(() => {
         try {
             setAllFoodData(foodData);
@@ -61,6 +58,11 @@ export default function Dashboard() {
         setIsOpen(!isOpen)
     }
 
+    // console.log(selectedDate.toLocaleDateString("fr-Fr"))
+    // console.log('___________')
+    // console.log(date.toLocaleDateString())
+    // console.log(selectedDate.toLocaleDateString())
+    // console.log('______________')
     return (
         <View style={styles.header}>
             <ThemedText>Voici ma page dashboard</ThemedText>
@@ -70,17 +72,14 @@ export default function Dashboard() {
                 </View>
                 <TouchableOpacity onPress={handleOpenCalendar}>
                     <View style={styles.calendar}>
-                        {/* <ThemedText>{currentDate === currentDate ? "Ajourd'hui" : currentDate}</ThemedText> */}
-                        
-                        {/* <RNDateTimePicker value={new Date()} timeZoneName={'Europe/Paris'} display="spinner" /> */}
-                        {/* <Button
-                            onPress={handleOpenCalendar}
-                            title="Learn More"
-                            color="#841584"
-                            accessibilityLabel="Learn more about this purple button"
-                        /> */}
-                            {isOpen && (<RNDateTimePicker onChange={setDate} value={new Date()} timeZoneName={'Europe/Paris'}/>)}
-                            <ThemedText>{selectedDate.toLocaleDateString('fr-FR') === currentDate ? 'Aujourd"hui': selectedDate.toLocaleDateString('fr-FR')}</ThemedText>
+                            {isOpen && (<RNDateTimePicker
+                                onChange={setDate}
+                                value={selectedDate}
+                                timeZoneOffsetInMinutes={new Date().getTimezoneOffset()} 
+                                />)}
+                            <ThemedText>{selectedDate.toLocaleDateString() === date.toLocaleDateString() ? 'Aujourd"hui': selectedDate.toLocaleDateString('fr-FR')}</ThemedText>
+                            <ThemedText>{selectedDate.toLocaleString()}</ThemedText>
+                            <ThemedText>{selectedDate.toLocaleDateString()}</ThemedText>
                     </View>
                 </TouchableOpacity>
                 <View>
