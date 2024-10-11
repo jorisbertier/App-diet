@@ -32,7 +32,7 @@ export default function Dashboard() {
             console.log(event)
         }
     };
-    
+    console.log(foodData)
     /* API */
     useEffect(() => {
         try {

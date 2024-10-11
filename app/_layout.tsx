@@ -19,7 +19,10 @@ export default function RootLayout() {
   // );
   return (
     <NavigationContainer independent={true}>
-      <Stack.Navigator screenOptions={{ headerShown: false}}>
+      <Stack.Navigator
+      screenOptions={{ headerShown: false}}
+      // initialRouteName="Login" Initail route name pour arriver en premier 
+      >
         <Stack.Screen
           name="Home"
           component={Index}
