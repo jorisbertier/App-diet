@@ -15,10 +15,10 @@ export default function Dashboard() {
     const [allUserData, setAllUserData] = useState([]);  // all user
     const [allUsersFoodData, setAllUsersFoodData] = useState([]);  // all UsersFoodData
     const [resultAllDataFood, setResultAllDataFood] = useState<FoodItem[]>([]); //State for stock search filtered
-    const [resultByBreakfast, setResultByBreakfast] = useState<FoodItem[]>([]); //State for stock search filtered
-    const [resultByLunch, setResultByLunch] = useState<FoodItem[]>([]); //State for stock search filtered
-    const [resultByDinner, setResultByDinner] = useState<FoodItem[]>([]); //State for stock search filtered
-    const [resultBySnack, setResultBySnack] = useState<FoodItem[]>([]); //State for stock search filtered
+    const [sortByBreakfast, setSortByBreakfast] = useState<FoodItem[]>([]); //State for stock search filtered
+    const [sortByLunch, setSortByLunch] = useState<FoodItem[]>([]); //State for stock search filtered
+    const [sortByDinner, setSortByDinner] = useState<FoodItem[]>([]); //State for stock search filtered
+    const [sortBySnack, setSortBySnack] = useState<FoodItem[]>([]); //State for stock search filtered
     const [isOpen, setIsOpen] = useState(false);
     const [selectedDate, setSelectedDate]= useState<Date>(new Date())
 
@@ -75,10 +75,10 @@ export default function Dashboard() {
         // }
 
         filterAndSetFoodData(result, setResultAllDataFood)
-        filterAndSetFoodData(resultByBreakfast, setResultByBreakfast)
-        filterAndSetFoodData(resultByLunch, setResultByLunch)
-        filterAndSetFoodData(resultByDinner, setResultByDinner)
-        filterAndSetFoodData(resultBySnack, setResultBySnack)
+        filterAndSetFoodData(resultByBreakfast, setSortByBreakfast)
+        filterAndSetFoodData(resultByLunch, setSortByLunch)
+        filterAndSetFoodData(resultByDinner, setSortByDinner)
+        filterAndSetFoodData(resultBySnack, setSortBySnack)
         console.log('resultByBreakfast')
         console.log(typeof resultByBreakfast)
         console.log('resultByBreakfast')
@@ -137,10 +137,10 @@ export default function Dashboard() {
             )} */}
             </Row>
             <View style={styles.wrapperMeals}>
-                    {displayResultFoodByMeal(resultByBreakfast, 'Breakfast')}
-                    {displayResultFoodByMeal(resultByLunch, 'Lunch')}
-                    {displayResultFoodByMeal(resultByDinner, 'Dinner')}
-                    {displayResultFoodByMeal(resultBySnack, 'Snack')}
+                    {displayResultFoodByMeal(sortByBreakfast, 'Breakfast')}
+                    {displayResultFoodByMeal(sortByLunch, 'Lunch')}
+                    {displayResultFoodByMeal(sortByDinner, 'Dinner')}
+                    {displayResultFoodByMeal(sortBySnack, 'Snack')}
             </View>
         </View>
     )
