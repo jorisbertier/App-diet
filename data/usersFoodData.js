@@ -53,6 +53,22 @@ export const UsersFoodData = [
         "foodId": 5,
         "date": "10/10/2024",
         "mealType": "Dinner",
-        "quantity": 2
-    }
+        "quantity": 1
+    },
+    {
+        "id": 8,
+        "userId": 1,
+        "foodId": 25,
+        "date": "10/10/2024",
+        "mealType": "Dinner",
+        "quantity": 1
+    },
+    {
+        "id": 9,
+        "userId": 1,
+        "foodId": 25,
+        "date": "10/10/2024",
+        "mealType": "Dinner",
+        "quantity": 1
+    },
 ]

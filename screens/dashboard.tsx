@@ -1,12 +1,13 @@
 import Row from "@/components/Row";
 import { ThemedText } from "@/components/ThemedText";
-import { StyleSheet, View, Image, Button, TouchableOpacity, FlatList } from "react-native";
-import RNDateTimePicker, { DateTimePicker, DateTimePickerEvent} from "@react-native-community/datetimepicker";
+import { StyleSheet, View, Image, TouchableOpacity, FlatList } from "react-native";
+import RNDateTimePicker, { DateTimePickerEvent} from "@react-native-community/datetimepicker";
 import { useState, useEffect } from "react";
 import { foodData } from "@/data/food";
 import { FoodItem } from '@/interface/FoodItem';
 import { Users } from "@/data/users";
 import { UsersFoodData } from "@/data/usersFoodData";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Dashboard() {
 
@@ -14,9 +15,12 @@ export default function Dashboard() {
     const [allUserData, setAllUserData] = useState([]);  // all user
     const [allUsersFoodData, setAllUsersFoodData] = useState([]);  // all UsersFoodData
     const [resultAllDataFood, setResultAllDataFood] = useState<FoodItem[]>([]); //State for stock search filtered
+    const [resultByBreakfast, setResultByBreakfast] = useState<FoodItem[]>([]); //State for stock search filtered
+    const [resultByLunch, setResultByLunch] = useState<FoodItem[]>([]); //State for stock search filtered
+    const [resultByDinner, setResultByDinner] = useState<FoodItem[]>([]); //State for stock search filtered
+    const [resultBySnack, setResultBySnack] = useState<FoodItem[]>([]); //State for stock search filtered
     const [isOpen, setIsOpen] = useState(false);
     const [selectedDate, setSelectedDate]= useState<Date>(new Date())
-    
 
     /* Date */
     const date = new Date();
@@ -41,17 +45,45 @@ export default function Dashboard() {
     }, []);
 
     useEffect(() => {
+        // function qui permet de filter les données recus et de recuperer les details
+        const filterAndSetFoodData = (filteredData, setData) => {
+            if (filteredData.length > 0) {
+                const foodIds = filteredData.map(item => item.foodId); //// the result to extract all the food IDs
+                const filteredFoodData = foodIds.flatMap(foodId => { // For each foodId get details food data from allFoodData
+                    return allFoodData.filter(food => food.id === foodId);
+                });
+                setData(filteredFoodData); // Update state with filtered data search
+            } else {
+                setData([])
+            }
+        }
         // filter data foods user with Id = 1
         const result = allUsersFoodData.filter((allFoodByOneUser) => allFoodByOneUser.userId === 1 && allFoodByOneUser.date === selectedDate.toLocaleDateString());
-        if (result.length > 0) {
-            const foodIds = result.map(item => item.foodId);
-            const filteredFoodData = foodIds.flatMap(foodId => {
-                return allFoodData.filter(food => food.id === foodId);
-            });
-            setResultAllDataFood(filteredFoodData); // Update state with filtered data search
-        } else {
-            setResultAllDataFood([])
-        }
+
+        const resultByBreakfast = result.filter((food) => food.mealType === 'Breakfast');
+        const resultByLunch = result.filter((food) => food.mealType === 'Lunch');
+        const resultByDinner = result.filter((food) => food.mealType === 'Dinner');
+        const resultBySnack = result.filter((food) => food.mealType === 'Snack');
+        // if (result.length > 0) {
+        //     const foodIds = result.map(item => item.foodId); //// the result to extract all the food IDs
+        //     const filteredFoodData = foodIds.flatMap(foodId => { // For each foodId get details food data from allFoodData
+        //         return allFoodData.filter(food => food.id === foodId);
+        //     });
+        //     setResultAllDataFood(filteredFoodData); // Update state with filtered data search
+        // } else {
+        //     setResultAllDataFood([])
+        // }
+
+        filterAndSetFoodData(result, setResultAllDataFood)
+        filterAndSetFoodData(resultByBreakfast, setResultByBreakfast)
+        filterAndSetFoodData(resultByLunch, setResultByLunch)
+        filterAndSetFoodData(resultByDinner, setResultByDinner)
+        filterAndSetFoodData(resultBySnack, setResultBySnack)
+        console.log('resultByBreakfast')
+        console.log(typeof resultByBreakfast)
+        console.log('resultByBreakfast')
+
+
     }, [allUsersFoodData, allFoodData, selectedDate]);
 
     const handleOpenCalendar = () => {
@@ -63,7 +95,9 @@ export default function Dashboard() {
     // console.log(date.toLocaleDateString())
     // console.log(selectedDate.toLocaleDateString())
     // console.log('______________')
-    
+    // console.log(resultAllDataFood)
+
+
     return (
         <View style={styles.header}>
             <ThemedText>Voici ma page dashboard</ThemedText>
@@ -88,7 +122,7 @@ export default function Dashboard() {
                 </View>
             </Row>
             <Row>
-            { resultAllDataFood.length !== 0 ? (
+            {/* { resultAllDataFood.length !== 0 ? (
                 <FlatList<FoodItem>
                     data={resultAllDataFood}
                     renderItem={({ item }) => (
@@ -100,8 +134,14 @@ export default function Dashboard() {
                 />
             ) : (
                 <ThemedText>Vous n'avez aucun aliment aujourd'hui</ThemedText>
-            )}
+            )} */}
             </Row>
+            <View style={styles.wrapperMeals}>
+                    {displayResultFoodByMeal(resultByBreakfast, 'Breakfast')}
+                    {displayResultFoodByMeal(resultByLunch, 'Lunch')}
+                    {displayResultFoodByMeal(resultByDinner, 'Dinner')}
+                    {displayResultFoodByMeal(resultBySnack, 'Snack')}
+            </View>
         </View>
     )
 }
@@ -111,7 +151,6 @@ const styles = StyleSheet.create({
         position: 'relative',
         paddingHorizontal: 12,
         paddingBottom: 8,
-        backgroundColor: 'gray',
         flex:  1
     },
     wrapperCalendar: {
@@ -126,4 +165,30 @@ const styles = StyleSheet.create({
         padding: 40,
         backgroundColor: 'yellow'
     },
+    wrapperMeals : {
+        gap: 16,
+        flexDirection: 'column',
+        width: '100%',
+    },
 })
+
+
+function displayResultFoodByMeal(resultMeal: any, meal: string) {
+    return (
+        <View style={styles.test}>
+            <ThemedText variant="title">{meal}</ThemedText>
+            { resultMeal.length !== 0 ? (
+                <FlatList<FoodItem>
+                    data={resultMeal}
+                    renderItem={({ item }) => (
+                        <ThemedText>{item.name}</ThemedText>
+                    )}
+                    showsVerticalScrollIndicator={false}
+                    keyExtractor={(item) => item.id.toString() + Math.random()}
+                />
+            ) : (
+                <ThemedText>Don't have any food for {meal}</ThemedText>
+            )}
+        </View>
+    )
+}
