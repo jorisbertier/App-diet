@@ -85,3 +85,12 @@ export interface FoodItem {
         }
     };
 }
+
+export interface Meal {
+    id: number;
+    userId: number;
+    foodId: number;
+    date: string;
+    mealType: string;
+    quantity: number;
+}

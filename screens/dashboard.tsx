@@ -4,7 +4,7 @@ import { StyleSheet, View, Image, TouchableOpacity, FlatList } from "react-nativ
 import RNDateTimePicker, { DateTimePickerEvent} from "@react-native-community/datetimepicker";
 import { useState, useEffect } from "react";
 import { foodData } from "@/data/food";
-import { FoodItem } from '@/interface/FoodItem';
+import { FoodItem, Meal } from '@/interface/FoodItem';
 import { Users } from "@/data/users";
 import { UsersFoodData } from "@/data/usersFoodData";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -25,7 +25,7 @@ export default function Dashboard() {
     /* Date */
     const date = new Date();
 
-    const setDate = (event: DateTimePickerEvent, date: Date) => {
+    const setDate = (event: DateTimePickerEvent, date: Date | undefined) => {
         if(date) {
             setSelectedDate(date);
             setIsOpen(false)
@@ -46,7 +46,7 @@ export default function Dashboard() {
 
     useEffect(() => {
         // function qui permet de filter les données recus et de recuperer les details
-        const filterAndSetFoodData = (filteredData, setData) => {
+        const filterAndSetFoodData = (filteredData: Meal[], setData: React.Dispatch<React.SetStateAction<FoodItem[]>>) => {
             if (filteredData.length > 0) {
                 const foodIds = filteredData.map(item => item.foodId); //// the result to extract all the food IDs
                 const filteredFoodData = foodIds.flatMap(foodId => { // For each foodId get details food data from allFoodData
@@ -58,7 +58,8 @@ export default function Dashboard() {
             }
         }
         // filter data foods user with Id = 1
-        const result = allUsersFoodData.filter((allFoodByOneUser) => allFoodByOneUser.userId === 1 && allFoodByOneUser.date === selectedDate.toLocaleDateString());
+        const result = allUsersFoodData.filter((allFoodByOneUser) =>
+        allFoodByOneUser.userId === 1 && allFoodByOneUser.date === selectedDate.toLocaleDateString());
 
         const resultByBreakfast = result.filter((food) => food.mealType === 'Breakfast');
         const resultByLunch = result.filter((food) => food.mealType === 'Lunch');
@@ -79,10 +80,6 @@ export default function Dashboard() {
         filterAndSetFoodData(resultByLunch, setSortByLunch)
         filterAndSetFoodData(resultByDinner, setSortByDinner)
         filterAndSetFoodData(resultBySnack, setSortBySnack)
-        console.log('resultByBreakfast')
-        console.log(typeof resultByBreakfast)
-        console.log('resultByBreakfast')
-
 
     }, [allUsersFoodData, allFoodData, selectedDate]);
 
@@ -96,7 +93,7 @@ export default function Dashboard() {
     // console.log(selectedDate.toLocaleDateString())
     // console.log('______________')
     // console.log(resultAllDataFood)
-
+    console.log('la')
 
     return (
         <View style={styles.header}>
