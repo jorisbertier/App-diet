@@ -1,13 +1,13 @@
 import Row from "@/components/Row";
 import { ThemedText } from "@/components/ThemedText";
-import { StyleSheet, View, Image, TouchableOpacity, FlatList } from "react-native";
+import { StyleSheet, View, Image, TouchableOpacity, FlatList, ScrollView } from "react-native";
 import RNDateTimePicker, { DateTimePickerEvent} from "@react-native-community/datetimepicker";
 import { useState, useEffect } from "react";
 import { foodData } from "@/data/food";
 import { FoodItem, Meal } from '@/interface/FoodItem';
 import { Users } from "@/data/users";
 import { UsersFoodData } from "@/data/usersFoodData";
-import { SafeAreaView } from "react-native-safe-area-context";
+import CardFoodResume from "@/components/Screens/Dashboard/CardFoodResume";
 
 export default function Dashboard() {
 
@@ -96,7 +96,7 @@ export default function Dashboard() {
     console.log('la')
 
     return (
-        <View style={styles.header}>
+        <ScrollView style={styles.header}>
             <ThemedText>Voici ma page dashboard</ThemedText>
             <Row style={styles.wrapperCalendar}>
                 <View>
@@ -139,7 +139,7 @@ export default function Dashboard() {
                     {displayResultFoodByMeal(sortByDinner, 'Dinner')}
                     {displayResultFoodByMeal(sortBySnack, 'Snack')}
             </View>
-        </View>
+        </ScrollView>
     )
 }
 
@@ -148,7 +148,6 @@ const styles = StyleSheet.create({
         position: 'relative',
         paddingHorizontal: 12,
         paddingBottom: 8,
-        flex:  1
     },
     wrapperCalendar: {
         marginTop: 200,
@@ -167,25 +166,44 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         width: '100%',
     },
+    wrapper: {
+        gap: 10,
+    },
+    wrapperFood : {
+        marginBottom: 16,
+    },
+    row: {
+        width: '100%',
+        justifyContent: 'space-between',
+        borderBottomColor: 'gray',
+        borderBottomWidth: 1
+    }
 })
 
 
 function displayResultFoodByMeal(resultMeal: any, meal: string) {
     return (
-        <View style={styles.test}>
-            <ThemedText variant="title">{meal}</ThemedText>
+        <View style={styles.wrapper}>
+            <Row style={styles.row}>
+                <ThemedText variant="title">{meal}</ThemedText>
+                <ThemedText>0 Kcal</ThemedText>
+            </Row>
+            <Row>
             { resultMeal.length !== 0 ? (
                 <FlatList<FoodItem>
                     data={resultMeal}
                     renderItem={({ item }) => (
-                        <ThemedText>{item.name}</ThemedText>
+                        // <ThemedText>{item.name}</ThemedText>
+                        <CardFoodResume name={item.name} quantity={item.nutrition.servingSize.quantity} unit={item.nutrition.servingSize.unit} image={item.image} id={item.id} calories={item.nutrition.calories}/>
                     )}
                     showsVerticalScrollIndicator={false}
+                    scrollEnabled={false}
                     keyExtractor={(item) => item.id.toString() + Math.random()}
                 />
-            ) : (
-                <ThemedText>Don't have any food for {meal}</ThemedText>
+                ) : (
+                    <ThemedText>Don't have any food for {meal}</ThemedText>
             )}
+            </Row>
         </View>
     )
 }
